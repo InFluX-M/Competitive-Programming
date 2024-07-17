@@ -2,10 +2,12 @@
 #define lid id << 1
 #define rid lid | 1
 
+int n;
+
 struct Data
 {
 public:
-    ll data;
+    ll data = 0;
     Data() {}
     Data(int data_) { data = data_; }
 };
@@ -13,16 +15,22 @@ public:
 struct Lazy
 {
 public:
-    ll prop;
+    ll prop = 0;
     Lazy() {}
     Lazy(int prop_) { prop = prop_; }
 };
-int n;
 
 struct LazySegTree
 {
-    Data seg[mxn * 4];
-    Lazy lazy[mxn * 4];
+    vector<Data> seg;
+    vector<Lazy> lazy;
+
+    LazySegTree(int n_)
+    {
+        n = n_;
+        seg.assign(4 * n, Data());
+        lazy.assign(4 * n, Lazy());
+    }
 
     Data merge(Data l, Data r)
     {
